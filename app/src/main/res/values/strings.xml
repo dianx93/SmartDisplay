@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Smart Display</string>
+    <string name="action_settings">Settings</string>
+    <string name="roominfo_format">This room has %1$d seats.</string>
+    <string name="currenteventinfo_format">In progress right now: %1$s.</string>
+    <string name="nexteventinfo_format">Next event: %1$s.</string>
+</resources>

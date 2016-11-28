@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/prev"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="&lt;" />
+
+        <TextView
+            android:id="@+id/currentweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="14.11 - 18.11"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="&gt;"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mon, 14.11"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/MonDate" />
+            <ListView
+                android:id="@+id/MonList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+        <View
+            android:id="@+id/SplitLine_ver1"
+            android:layout_width="1dp"
+            android:layout_height= "match_parent"
+            android:background="?android:attr/listDivider" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tue, 15.11"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/TueDate" />
+            <ListView
+                android:id="@+id/TueList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+        <View
+            android:id="@+id/SplitLine_ver2"
+            android:layout_width="1dp"
+            android:layout_height= "match_parent"
+            android:background="?android:attr/listDivider" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wed, 16.11"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/WedDate" />
+            <ListView
+                android:id="@+id/WedList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+        <View
+            android:id="@+id/SplitLine_ver3"
+            android:layout_width="1dp"
+            android:layout_height= "match_parent"
+            android:background="?android:attr/listDivider" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu, 17.11"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/ThuDate" />
+            <ListView
+                android:id="@+id/ThuList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+        <View
+            android:id="@+id/SplitLine_ver4"
+            android:layout_width="1dp"
+            android:layout_height= "match_parent"
+            android:background="?android:attr/listDivider" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri, 18.11"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/FriDate" />
+            <ListView
+                android:id="@+id/FriList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linlaHeaderProgress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar6" />
+    </LinearLayout>
+    <!--
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressCircular" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressHorizontal" />
+    -->
+</LinearLayout>
