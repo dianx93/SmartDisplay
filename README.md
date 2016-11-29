@@ -1,5 +1,7 @@
 # SmartDisplay
 
+## Compiling
+
 To compile and get this code running (following this tutorial https://developers.google.com/google-apps/calendar/quickstart/android):
 
 First acquire an SHA1 fingerprint with this KeyTool utility (https://developer.android.com/studio/publish/index.html) command:
@@ -20,3 +22,9 @@ Then use this wizard: https://console.developers.google.com/flows/enableapi?apii
 6. Copy the SHA1 fingerprint from Step 1 into the Signing-certificate fingerprint field.
 7. In the Package name field, enter com.example.dianaalgma.smartdisplay.
 8. Click the Create button.
+
+## Changing the calendar
+
+If you want to use another calendar, then modify the CALENDAR_ID value in the MainActivity.java file.
+You will possibly want to change also the room/location, that that can also be done there.
+Make sure, that all your events have a location.
