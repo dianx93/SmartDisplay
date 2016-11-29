@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity
         To get your Calendar_ID: go to your google calendar -> calendar settings -> Calendar Address
         When adding a new room, add its seat count in the method onCreate
      */
-    public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
-    //public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
-    public static final String LOCATION_ID = "J. Liivi 2 - 403";
+    //public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
+    public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
+    //public static final String LOCATION_ID = "J. Liivi 2 - 403";
     //public static final String LOCATION_ID = "Ülikooli 17 - 220";
-    //public static final String LOCATION_ID = "J. Liivi 2 - 401";
+    public static final String LOCATION_ID = "J. Liivi 2 - 401";
     private static HashMap<String, Integer> seatcount = new HashMap<>();
 
     //calendar stuff:
@@ -491,7 +491,7 @@ public class MainActivity extends AppCompatActivity
                     .setTimeMax(weekEnd).setOrderBy("startTime").setSingleEvents(true).execute();
 
             final Events currentevents = mService.events().list(CALENDAR_ID)
-                    .setMaxResults(2)
+                    .setMaxResults(150)
                     .setTimeMin(now).setOrderBy("startTime").setSingleEvents(true).execute();
 
             List<Event> items = LocationFilter(currentevents.getItems(), LOCATION_ID);
@@ -500,11 +500,8 @@ public class MainActivity extends AppCompatActivity
             final List<Event> wedItems = LocationFilter(wedEvents.getItems(), LOCATION_ID);
             final List<Event> thuItems = LocationFilter(thuEvents.getItems(), LOCATION_ID);
             final List<Event> friItems = LocationFilter(friEvents.getItems(), LOCATION_ID);
-            //eventStrings.add(String.format("Events from %s to %s:", weekStart, weekEnd));
-            eventStrings.add("CurrentEvents: ");
-            final Event current;// = items.remove(0);
-            final Event next;// = items.remove(0);
-            Event item;
+            final Event current;
+            final Event next;
             if(!items.isEmpty()){
                 Event first = items.remove(0);
                 DateTime start = first.getStart().getDateTime();
