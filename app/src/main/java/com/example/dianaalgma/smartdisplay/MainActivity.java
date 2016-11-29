@@ -536,6 +536,7 @@ public class MainActivity extends AppCompatActivity
                             thuItems, friItems, weekStart);
                 }
             });
+            eventStrings.add("Got events from API");
             return eventStrings;
         }
 
