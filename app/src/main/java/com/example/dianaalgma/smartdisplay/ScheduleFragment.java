@@ -298,8 +298,10 @@ public class ScheduleFragment extends Fragment {
         friAdapter.clear();
     }
     public String EventToString(Event event){
-        return String.format("%s at %s", event.getSummary(), new SimpleDateFormat("HH:mm")
-                .format(new Date(event.getStart().getDateTime().getValue())));
+        return String.format("%s-%s %s",
+                new SimpleDateFormat("HH:mm").format(new Date(event.getStart().getDateTime().getValue())),
+                new SimpleDateFormat("HH:mm").format(new Date(event.getEnd().getDateTime().getValue())),
+                event.getSummary());
     }
 
     public List<String> ListToStrings(List<Event> events){

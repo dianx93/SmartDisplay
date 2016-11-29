@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity
         To get your Calendar_ID: go to your google calendar -> calendar settings -> Calendar Address
         When adding a new room, add its seat count in the method onCreate
      */
-    //public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
-    public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
-    //public static final String LOCATION_ID = "J. Liivi 2 - 403";
+    public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
+    //public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
+    public static final String LOCATION_ID = "J. Liivi 2 - 403";
     //public static final String LOCATION_ID = "Ülikooli 17 - 220";
-    public static final String LOCATION_ID = "J. Liivi 2 - 401";
+    //public static final String LOCATION_ID = "J. Liivi 2 - 401";
     private static HashMap<String, Integer> seatcount = new HashMap<>();
 
     //calendar stuff:
