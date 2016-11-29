@@ -46,6 +46,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity
             This is where the seat counts are added:
          */
         seatcount.put("Ülikooli 17 - 220", 18);
-        seatcount.put("J. Liivi 2 - 403", 50); //TODO: count
+        seatcount.put("J. Liivi 2 - 403", 72);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -157,7 +159,17 @@ public class MainActivity extends AppCompatActivity
         //Breaks app, don't know why
         //ScheduleFragment.newInstance().showProgress(false);
 
-        getResultsFromApi();
+        //Automatic update every 20 sec, later every 30 min
+        Timer timer = new Timer ();
+        TimerTask automaticUpdate = new TimerTask () {
+            @Override
+            public void run () {
+                getResultsFromApi();
+            }
+        };
+
+        // schedule the task to run starting now and then every hour...
+        timer.schedule (automaticUpdate, 0l, 1000*2*10);   // TODO: make it appropriate 1000*30*60
 
         ScheduleFragment.newInstance().setNextWeekListener(new View.OnClickListener() {
             @Override
