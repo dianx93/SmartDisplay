@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_width="321dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.07">
+            android:layout_weight="1">
 
             <TextView
                 android:text="Room"
@@ -74,10 +74,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView4"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginEnd="30dp" />
 
@@ -90,13 +89,13 @@
                 android:layout_alignStart="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
+<!--
             <TextView
                 android:text="Content for next event:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView3"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_alignTop="@+id/nexteventinfo"
                 android:layout_alignLeft="@+id/currentqrcode"
                 android:layout_alignStart="@+id/currentqrcode" />
@@ -105,12 +104,13 @@
                 app:srcCompat="@drawable/next_event_document_demo"
                 android:id="@+id/nextqrcode"
                 android:cropToPadding="false"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_below="@+id/nexteventinfo"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:gravity="right" />-->
         </LinearLayout>
     </LinearLayout>
 
