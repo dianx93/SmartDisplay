@@ -143,6 +143,11 @@ public class ScheduleFragment extends Fragment {
         prevWeekListener = listener;
     }
 
+    public void disableButtons(){
+        prevWeek.setEnabled(false);
+        nextWeek.setEnabled(false);
+    }
+
     public void showProgress(boolean inProgress){
         if(inProgress)
             progressLayout.setVisibility(View.VISIBLE);
@@ -281,6 +286,8 @@ public class ScheduleFragment extends Fragment {
         FriDate.setText(new SimpleDateFormat("EEE, dd.MM").format((new DateTime(c.getTimeInMillis())).getValue()));
         currentWeek.setText(mon + " - " + fri);
         showProgress(false);
+        nextWeek.setEnabled(true);
+        prevWeek.setEnabled(true);
     }
 
     public void ClearCalendar(){

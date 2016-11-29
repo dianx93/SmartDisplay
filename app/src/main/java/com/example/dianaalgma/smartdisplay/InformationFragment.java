@@ -72,7 +72,6 @@ public class InformationFragment extends Fragment {
     }
 
     public static void setCurrentEvents(Event current, Event next) {
-        //TODO format ja if today
         if(current != null){
             currentevent_text.setText(String.format("In progress right now:\n\t%s\n\tfrom %s to %s", current.getSummary(),
                     new SimpleDateFormat("HH:mm").format(new Date(current.getStart().getDateTime().getValue())),
