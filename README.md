@@ -25,6 +25,6 @@ Then use this wizard: https://console.developers.google.com/flows/enableapi?apii
 
 ## Changing the calendar
 
-If you want to use another calendar, then modify the CALENDAR_ID value in the MainActivity.java file.
+To change the calendar that the app will fetch, modify the CALENDAR_ID value in the MainActivity.java file.
 You will possibly want to change also the room/location, that that can also be done there.
 Make sure, that all your events have a location.
