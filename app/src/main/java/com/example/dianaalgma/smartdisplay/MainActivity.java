@@ -490,7 +490,7 @@ public class MainActivity extends AppCompatActivity
                             thuItems, friItems, weekStart);
                 }
             });
-            eventStrings.add("Got events from API");
+            eventStrings.add("Got events from Google Calendar API");
             return eventStrings;
         }
 
@@ -514,7 +514,6 @@ public class MainActivity extends AppCompatActivity
             if (output == null || output.size() == 0) {
                 System.err.println("No results returned");
             } else {
-                output.add(0, "Data retrieved using the Google Calendar API:");
                 System.err.println(TextUtils.join("\n", output));
             }
         }
