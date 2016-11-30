@@ -2,50 +2,49 @@ package com.example.dianaalgma.smartdisplay;
 
 //google api:
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
-
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.ExponentialBackOff;
-
-import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.client.util.DateTime;
-
-import com.google.api.services.calendar.model.*;
 import android.Manifest;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,24 +53,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
-
-import com.example.dianaalgma.smartdisplay.ScheduleFragment;
-import com.example.dianaalgma.smartdisplay.InformationFragment;
 
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
@@ -80,11 +61,11 @@ public class MainActivity extends AppCompatActivity
         To get your Calendar_ID: go to your google calendar -> calendar settings -> Calendar Address
         When adding a new room, add its seat count in the method onCreate
      */
-    public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
-    //public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
-    public static final String LOCATION_ID = "J. Liivi 2 - 403";
+    //public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
+    public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
+    //public static final String LOCATION_ID = "J. Liivi 2 - 403";
     //public static final String LOCATION_ID = "Ülikooli 17 - 220";
-    //public static final String LOCATION_ID = "J. Liivi 2 - 401";
+    public static final String LOCATION_ID = "J. Liivi 2 - 401";
     private static HashMap<String, Integer> seatcount = new HashMap<>();
 
     //calendar stuff:
@@ -530,7 +511,6 @@ public class MainActivity extends AppCompatActivity
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //InformationFragment.setTestText(eventStrings.toString());
                     InformationFragment.setCurrentEvents(current, next);
                     ScheduleFragment.newInstance().setWeekEvents(monItems, tueItems, wedItems,
                             thuItems, friItems, weekStart);
@@ -543,7 +523,7 @@ public class MainActivity extends AppCompatActivity
         protected List<Event> LocationFilter(List<Event> events, String location){
             List<Event> items = new ArrayList<>();
             for(Event e: events){
-                if(e.getLocation().equals(location)){
+                if(e.getLocation()!= null && e.getLocation().equals(location)){
                     items.add(e);
                 }
             }
@@ -553,19 +533,14 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             System.err.println("Starting progress");
-            //mOutputText.setText("");
-            //mProgress.show();
         }
 
         @Override
         protected void onPostExecute(List<String> output) {
-            //mProgress.hide();
             if (output == null || output.size() == 0) {
-                //mOutputText.setText("No results returned.");
                 System.err.println("No results returned");
             } else {
                 output.add(0, "Data retrieved using the Google Calendar API:");
-                //mOutputText.setText(TextUtils.join("\n", output));
                 System.out.println(TextUtils.join("\n", output));
             }
         }
@@ -645,7 +620,6 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 

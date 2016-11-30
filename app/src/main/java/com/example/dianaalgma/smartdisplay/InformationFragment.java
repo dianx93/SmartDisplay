@@ -73,11 +73,13 @@ public class InformationFragment extends Fragment {
 
     public static void setCurrentEvents(Event current, Event next) {
         if(current != null){
+            if(current.getSummary() == null) current.setSummary("(No title)");
             currentevent_text.setText(String.format("In progress right now:\n\t%s\n\tfrom %s to %s", current.getSummary(),
                     new SimpleDateFormat("HH:mm").format(new Date(current.getStart().getDateTime().getValue())),
                     new SimpleDateFormat("HH:mm").format(new Date(current.getEnd().getDateTime().getValue()))));
         }
         if(next != null){
+            if(next.getSummary() == null) next.setSummary("(No title)");
             if(DateUtils.isToday(next.getStart().getDateTime().getValue())){
                 nextevent_text.setText(String.format("Next event:\n\t%s\n\ttoday from %s to %s", next.getSummary(),
                         new SimpleDateFormat("HH:mm").format(new Date(next.getStart().getDateTime().getValue())),
