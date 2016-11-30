@@ -10,25 +10,16 @@ import android.widget.TextView;
 
 import com.google.api.services.calendar.model.Event;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Information fragment containing the information about the room
  */
 public class InformationFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
+
     private static final String ARG_LOCATION_ID = "location_id";
     private static final String ARG_SEATCOUNT = "seatcount";
-    private static TextView test_text;
     private static TextView currentevent_text;
     private static TextView nextevent_text;
 
@@ -36,13 +27,11 @@ public class InformationFragment extends Fragment {
     }
 
     /**
-     * Returns a new instance of this fragment for the given section
-     * number.
+     * Returns a new instance of this fragment for the given location.
      */
     public static InformationFragment newInstance(String LOCATION_ID, int seatcount) {
         InformationFragment fragment = new InformationFragment();
         Bundle args = new Bundle();
-        //args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         args.putString(ARG_LOCATION_ID, LOCATION_ID);
         args.putInt(ARG_SEATCOUNT, seatcount);
         fragment.setArguments(args);
@@ -53,22 +42,15 @@ public class InformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         TextView room_name = (TextView) rootView.findViewById(R.id.room_name);
         room_name.setText(getArguments().getString(ARG_LOCATION_ID));
         if(getArguments().getInt(ARG_SEATCOUNT) != -1){
             TextView room_info = (TextView) rootView.findViewById(R.id.roominfo);
             room_info.setText(getString(R.string.roominfo_format, getArguments().getInt(ARG_SEATCOUNT)));
         }
-        //test_text = (TextView) rootView.findViewById(R.id.test_text);
         currentevent_text = (TextView) rootView.findViewById(R.id.currenteventinfo);
         nextevent_text = (TextView) rootView.findViewById(R.id.nexteventinfo);
         return rootView;
-    }
-
-    public static void setTestText(String text){
-        test_text.setText(text);
     }
 
     public static void setCurrentEvents(Event current, Event next) {

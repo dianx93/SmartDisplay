@@ -1,7 +1,5 @@
 package com.example.dianaalgma.smartdisplay;
 
-//google api:
-
 import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.Dialog;
@@ -51,15 +49,13 @@ import java.util.TimerTask;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-//import android.support.design.widget.FloatingActionButton;
-//import android.support.design.widget.Snackbar;
-
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
 
-    /*
-        To get your Calendar_ID: go to your google calendar -> calendar settings -> Calendar Address
-        When adding a new room, add its seat count in the method onCreate
+    /**
+     * To get your Calendar_ID: go to your google calendar -> calendar settings -> Calendar Address
+     * LOCATION_ID must be identical to the Location field of the events happening the room
+     * When adding a new room, add its seat count in the method onCreate
      */
     //public static final String CALENDAR_ID = "m8f26uhisq9sljn3ng4jtj8tbnt81pbc@import.calendar.google.com";
     public static final String CALENDAR_ID = "ptv7ut1ovff009640ltdig14uc@group.calendar.google.com";
@@ -100,22 +96,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        if (savedInstanceState != null) {
-            // Restore value of members from saved state
-            System.err.println("this was open before");
-        } else {
-            // Probably initialize members with default values for a new instance
-            System.err.println("this is a new one");
-        }*/
         setContentView(R.layout.activity_main);
-        /*
-            This is where the seat counts are added:
+        /**
+         * This is where the seat counts are added:
          */
         seatcount.put("Ülikooli 17 - 220", 18);
         seatcount.put("J. Liivi 2 - 403", 72);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -137,10 +126,7 @@ public class MainActivity extends AppCompatActivity
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         cal.add(Calendar.DAY_OF_WEEK, 1);
 
-        //Breaks app, don't know why
-        //ScheduleFragment.newInstance().showProgress(false);
-
-        //Automatic update every 20 sec, later every 30 min
+        //Automatic update every 20 sec, later every 10 min
         Timer timer = new Timer ();
         TimerTask automaticUpdate = new TimerTask () {
             @Override
@@ -149,8 +135,8 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-        // schedule the task to run starting now and then every hour...
-        timer.schedule (automaticUpdate, 0l, 1000*3*10);   // TODO: make it appropriate 1000*30*60
+        // schedule the task to run starting now and then every x minutes/seconds...
+        timer.schedule (automaticUpdate, 0l, 1000*3*10);   // TODO: make it appropriate 1000*10*60
 
         ScheduleFragment.newInstance().setNextWeekListener(new View.OnClickListener() {
             @Override
@@ -188,17 +174,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             new MakeRequestTask(mCredential).execute();
         }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        //savedInstanceState.putInt(STATE_SCORE, mCurrentScore);
-        //savedInstanceState.putInt(STATE_LEVEL, mCurrentLevel);
-        //savedInstanceState.put
-
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     /**
@@ -430,7 +405,6 @@ public class MainActivity extends AppCompatActivity
             //Getting the start of the needed week
             cal.add(Calendar.WEEK_OF_YEAR, change);
 
-            //cal.add(Calendar.DAY_OF_WEEK, 1);   //start of Monday
             final DateTime weekStart = new DateTime(cal.getTimeInMillis());
             cal.add(Calendar.DAY_OF_WEEK, 1);   //start of Monday
             DateTime monEnd = new DateTime(cal.getTimeInMillis());
@@ -541,13 +515,12 @@ public class MainActivity extends AppCompatActivity
                 System.err.println("No results returned");
             } else {
                 output.add(0, "Data retrieved using the Google Calendar API:");
-                System.out.println(TextUtils.join("\n", output));
+                System.err.println(TextUtils.join("\n", output));
             }
         }
 
         @Override
         protected void onCancelled() {
-            //mProgress.hide();
             if (mLastError != null) {
                 if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
                     showGooglePlayServicesAvailabilityErrorDialog(
@@ -558,13 +531,11 @@ public class MainActivity extends AppCompatActivity
                             ((UserRecoverableAuthIOException) mLastError).getIntent(),
                             MainActivity.REQUEST_AUTHORIZATION);
                 } else {
-                    //mOutputText.setText("The following error occurred:\n"
                     System.err.println("The following error occurred: \n"
                             + mLastError.getMessage());
                 }
             } else {
-                //mOutputText.setText("Request cancelled.");
-                System.out.println("Request cancelled.");
+                System.err.println("Request cancelled.");
             }
         }
     }
@@ -604,8 +575,6 @@ public class MainActivity extends AppCompatActivity
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1);
             switch(position) {
                 case 0:
                     if(seatcount.get(LOCATION_ID) == null)
@@ -620,6 +589,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
+            //number of fragments
             return 2;
         }
 
@@ -630,8 +600,6 @@ public class MainActivity extends AppCompatActivity
                     return "SECTION 1";
                 case 1:
                     return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
             }
             return null;
         }
