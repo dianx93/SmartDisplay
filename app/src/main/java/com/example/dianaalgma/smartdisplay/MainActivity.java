@@ -124,7 +124,10 @@ public class MainActivity extends AppCompatActivity
         cal.clear(Calendar.MILLISECOND);
 
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        cal.add(Calendar.DAY_OF_WEEK, 1);
+
+        //If the week starts from Sun, go forward 1 day (weekstarts differ in different devices)
+        if(cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
+            cal.add(Calendar.DAY_OF_WEEK, 1);
 
         //Automatic update every 20 sec, later every 10 min
         Timer timer = new Timer ();
